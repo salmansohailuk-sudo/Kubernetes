@@ -1,4 +1,64 @@
+
 ----------------------------------- Kubernetes---------------------------------------------
+Steps to Create EKS Cluster
+
+1. 
+----------kubectl Installation-----------
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+
+chmod +x ./kubectl  
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+=============================================================
+
+2. 
+----------- eksctl  Installation ------------------------ 
+   a. Download and extract the latest release   
+   b. Move the extracted binary to /usr/local/bin   
+   c. Test that your eksclt installation was successful   
+   ```sh
+   curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+   sudo mv /tmp/eksctl /usr/local/bin
+   eksctl version
+
+
+# EKS cluster Setup Process 
+
+  # Create an IAM Role and attache it to EC2 instance    
+   `Note: create IAM user with programmatic access if your bootstrap system is outside of AWS`   
+   IAM user should have access to   
+   IAM   
+   EC2   
+   VPC    
+   CloudFormation
+
+# Create your cluster and nodes 
+   ```sh
+   eksctl create cluster --name cluster-name  \
+   --region region-name \
+   --node-type instance-type \
+   --nodes-min 2 \
+   --nodes-max 2 \ 
+   --zones <AZ-1>,<AZ-2>
+   
+
+3. example:
+   eksctl create cluster --name testing \
+      --region us-east-1 \
+   --node-type t2.medium \
+
+==========End of EKS Kubernetes on AWS installation is done ==============
+# after create cluster to update it
+ aws eks update-kubeconfig --region <region> --name <cluster name>
+
+ ex: aws eks update-kubeconfig --region ap-south-1 --name naresh
+
+ # To delete the EKS clsuter 
+    
+   eksctl delete cluster naresh --region ap-south-1
+
+
+
 
 Kubernetes is a container orchestration system that was initially designed by Google to help scale
 containerized applications in the cloud. Kubernetes can manage the lifecycle of containers, creating and
@@ -74,67 +134,6 @@ to update       --- minikube update-context
 What is Kubectl?
 
 kubectl is the Kubernetes-specific command line tool that lets you communicate and control Kubernetes clusters. Whether you're creating, managing, or deleting resources on your Kubernetes platform, kubectl is an essential tool.
-
-----------kubectl Installation-----------
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-
-chmod +x ./kubectl  
-sudo mv ./kubectl /usr/local/bin/kubectl
-
-=============================================================
-
------------ eksctl  Installation ------------------------ 
-   a. Download and extract the latest release   
-   b. Move the extracted binary to /usr/local/bin   
-   c. Test that your eksclt installation was successful   
-   ```sh
-   curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-   sudo mv /tmp/eksctl /usr/local/bin
-   eksctl version
-
-
-# EKS cluster Setup Process 
-
-  # Create an IAM Role and attache it to EC2 instance    
-   `Note: create IAM user with programmatic access if your bootstrap system is outside of AWS`   
-   IAM user should have access to   
-   IAM   
-   EC2   
-   VPC    
-   CloudFormation
-
-  # Create your cluster and nodes 
-   ```sh
-   eksctl create cluster --name cluster-name  \
-   --region region-name \
-   --node-type instance-type \
-   --nodes-min 2 \
-   --nodes-max 2 \ 
-   --zones <AZ-1>,<AZ-2>
-   
-   example:
-   eksctl create cluster --name test \
-      --region ap-south-1 \
-   --node-type t2.small \
-
-# after create cluster to update it
- aws eks update-kubeconfig --region <region> --name <cluster name>
-
- ex: aws eks update-kubeconfig --region ap-south-1 --name naresh
-
- # To delete the EKS clsuter 
-    
-   eksctl delete cluster naresh --region ap-south-1
-   
-   
-
-
-
-
-
-
-
-
 
 
 
@@ -1936,5 +1935,4 @@ pleae click below git hub link for all yml files
 
 https://github.com/CloudTechDevOps/Kubernetes
  
-
 
