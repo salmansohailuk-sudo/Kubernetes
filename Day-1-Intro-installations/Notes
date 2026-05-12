@@ -73,6 +73,9 @@ sudo mv ./kubectl /usr/local/bin/kubectl
    13  kubectl get pod -o wide
    15  kubectl exec -it myapp-replicaset-79sfj -- /bin/bash
 
+apt update
+apt install iputils-ping -y
+
 ====================================
 
 
