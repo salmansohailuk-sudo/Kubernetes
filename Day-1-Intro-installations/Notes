@@ -23,7 +23,7 @@ eksctl version
 eksctl create cluster \
   --name testing \
   --region us-east-1 \
-  --node-type t2.medium
+  --node-type t3.medium
 
 
 I turned your commands into a sequential .sh script with basic safety (set -e) and install verification steps for both kubectl and eksctl.
