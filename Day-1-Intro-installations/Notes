@@ -1,3 +1,49 @@
+EKS Cluster Setup - eks_cluster_setup.sh
+
+Step 1. vi esk_cluster_setup.sh
+
+Eks Cluster Setup Script
+· bash
+#!/bin/bash
+
+set -e
+# Install kubectl
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+# Verify kubectl installation
+kubectl version --client
+# Install eksctl
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+# Verify eksctl installation
+eksctl version
+
+# Create EKS cluster
+eksctl create cluster \
+  --name testing \
+  --region us-east-1 \
+  --node-type t2.medium
+
+
+I turned your commands into a sequential .sh script with basic safety (set -e) and install verification steps for both kubectl and eksctl.
+
+Before running it:
+
+Make sure you have AWS credentials configured (aws configure)
+Your IAM user/role needs permission to create EKS clusters
+Creating an EKS cluster will incur AWS charges
+
+Step 2. 
+
+Run it with:
+
+chmod +x eks_cluster_setup.sh
+./eks_cluster_setup.sh
+
+======================================================================END.
+
+
 
 ----------------------------------- Kubernetes---------------------------------------------
 Steps to Create EKS Cluster
