@@ -38,8 +38,8 @@ Step 2.
 
 Run it with:
 
-chmod +x eks_cluster_setup.sh
-./eks_cluster_setup.sh
+chmod +x kubcluster.sh
+./kubcluster.sh
 
 ======================================================================END.
 
